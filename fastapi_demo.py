@@ -44,6 +44,7 @@ class ReasoningResponse(BaseModel):
     reasoning_trace: list
 
 @app.get("/health")
+@app.head("/health")
 async def health_check():
     """Health check endpoint for Kubernetes ingress."""
     return {
