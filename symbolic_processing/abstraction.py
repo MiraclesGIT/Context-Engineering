@@ -7,9 +7,12 @@ abstract variables based on relationships between tokens.
 """
 
 import asyncio
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, TYPE_CHECKING
 from dataclasses import dataclass
 from collections import defaultdict
+
+if TYPE_CHECKING:
+    from .manager import SymbolicVariable
 
 @dataclass
 class AbstractionResult:
