@@ -402,23 +402,25 @@ Examples:
             
             query = request_data.get('query', 'Hello, Context Engineering!')
             
-            # Simulate processing with the contextual engine
-            # In a real implementation, you would use: result = await self.engine.reason(query)
-            response_data = {
-                "success": True,
-                "query": query,
-                "response": f"Context Engineering Response: This is a sophisticated contextual analysis of your query '{query}'. The system has processed this through multiple cognitive layers including symbolic reasoning, neural field dynamics, and memory consolidation to provide a comprehensive response.",
-                "confidence": 87,
-                "processing_time": "1.23",
-                "components_used": 5,
-                "reasoning_trace": [
-                    "Understanding phase completed",
-                    "Information extraction successful", 
-                    "Pattern highlighting identified",
-                    "Reasoning application executed",
-                    "Validation passed"
-                ]
-            }
+            if self.engine_ready and ENGINE_AVAILABLE:
+                # Try to use the actual contextual engine
+                try:
+                    result = self.engine.reason_sync(query)
+                    response_data = {
+                        "success": True,
+                        "query": query,
+                        "response": result.result,
+                        "confidence": int(result.confidence_score * 100),
+                        "processing_time": f"{result.processing_time:.2f}",
+                        "components_used": len(result.reasoning_trace),
+                        "reasoning_trace": [step.get('description', str(step)) for step in result.reasoning_trace[:5]]
+                    }
+                except Exception as e:
+                    # Fall back to mock response
+                    response_data = self._get_mock_response(query, f"Engine error: {e}")
+            else:
+                # Use mock response
+                response_data = self._get_mock_response(query)
             
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
@@ -439,6 +441,24 @@ Examples:
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
             self.wfile.write(json.dumps(error_response).encode())
+    
+    def _get_mock_response(self, query, error_context=""):
+        """Generate a mock response for demonstration."""
+        return {
+            "success": True,
+            "query": query,
+            "response": f"🧠 Context Engineering Demo Response: This query '{query}' has been processed through our comprehensive contextual framework integrating multiple research components. {error_context}The system demonstrates multi-layered reasoning combining symbolic processing, neural field dynamics, quantum semantics, and progressive complexity management to provide contextually-aware responses.",
+            "confidence": 87,
+            "processing_time": "1.23",
+            "components_used": 5,
+            "reasoning_trace": [
+                "✓ Understanding phase - Query parsed and contextualized",
+                "✓ Information extraction - Key concepts identified", 
+                "✓ Pattern highlighting - Relevant patterns matched",
+                "✓ Reasoning application - Multi-step inference executed",
+                "✓ Validation - Response coherence verified"
+            ]
+        }
 
 def run_demo_server(port=8001):
     """Run the demo server."""
