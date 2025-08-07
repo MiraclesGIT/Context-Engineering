@@ -232,6 +232,125 @@ async def serve_demo_page():
             font-size: 0.9em; 
             color: #718096; 
         }
+        .tour-btn, .workflow-btn {
+            background: #48bb78;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .tour-btn:hover, .workflow-btn:hover {
+            background: #38a169;
+        }
+        .tour-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tour-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 20px;
+            text-align: center;
+        }
+        .tour-controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tour-controls button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .close-tour {
+            background: #e53e3e !important;
+            color: white !important;
+        }
+        .workflow-panel {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .workflow-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .workflow-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        .workflow-card h5 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .workflow-card p {
+            margin: 0;
+            font-size: 14px;
+            color: #718096;
+        }
+        .query-suggestions {
+            margin: 15px 0;
+            padding: 15px;
+            background: #edf2f7;
+            border-radius: 8px;
+        }
+        .suggestion-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            margin: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .suggestion-btn:hover {
+            background: #5a6fd8;
+        }
+        .value-highlight {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .step-indicator {
+            background: #48bb78;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
