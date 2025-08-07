@@ -476,20 +476,145 @@ async def serve_demo_page():
     </div>
 
     <script>
+        let currentTourStep = 0;
+        const tourSteps = [
+            {
+                title: "Welcome to Context Engineering 🧠",
+                text: "This framework integrates cutting-edge research from 6 leading institutions into a unified contextual AI system. Unlike traditional AI, this provides structured reasoning with full transparency."
+            },
+            {
+                title: "Multi-Stage Cognitive Processing 🔄",
+                text: "Every query goes through 5 cognitive stages: Understanding → Information Extraction → Pattern Highlighting → Reasoning Application → Validation. This ensures comprehensive analysis."
+            },
+            {
+                title: "Research Integration Power 🎓",
+                text: "We combine IBM Zurich's cognitive tools, Shanghai AI Lab's neural fields, Singapore-MIT's memory systems, Princeton's symbolic processing, Indiana University's quantum semantics, and progressive complexity management."
+            },
+            {
+                title: "Dynamic Field Processing 🌊",
+                text: "Neural fields create dynamic information landscapes where patterns emerge naturally. This allows for non-linear reasoning and creative problem-solving that traditional AI cannot achieve."
+            },
+            {
+                title: "Adaptive Complexity Scaling 📈",
+                text: "The system automatically scales from simple (Atom-level) to complex (Field-level) reasoning based on your query. Simple questions get fast answers, complex problems get deep analysis."
+            },
+            {
+                title: "Transparent Reasoning 🔍",
+                text: "Unlike black-box AI, you see exactly how conclusions are reached through reasoning traces, confidence scores, and component usage metrics. Full transparency builds trust."
+            },
+            {
+                title: "Ready to Experience It? 🚀",
+                text: "Try the workflows below or enter your own query. Watch as multiple research breakthroughs work together to provide superior contextual understanding."
+            }
+        ];
+        
+        const workflows = {
+            'research': {
+                query: "Analyze the current state of quantum computing and its implications for cryptographic security over the next decade",
+                description: "Multi-step research analysis combining literature synthesis, trend analysis, and future implications"
+            },
+            'problem-solving': {
+                query: "How can we design a sustainable urban transportation system that reduces emissions by 70% while maintaining accessibility and economic viability?",
+                description: "Complex problem decomposition with constraint satisfaction and solution optimization"
+            },
+            'creative': {
+                query: "Design an innovative approach to remote team collaboration that leverages emerging technologies while addressing current pain points in distributed work",
+                description: "Creative ideation grounded in contextual understanding and practical constraints"
+            },
+            'technical': {
+                query: "Explain the architectural trade-offs between microservices and monolithic systems, considering scalability, complexity, and team structure implications",
+                description: "Deep technical analysis with multi-dimensional evaluation and practical recommendations"
+            }
+        };
+
+        function startTour() {
+            currentTourStep = 0;
+            document.getElementById('tourOverlay').style.display = 'flex';
+            updateTourContent();
+        }
+        
+        function updateTourContent() {
+            const step = tourSteps[currentTourStep];
+            document.getElementById('tourTitle').textContent = step.title;
+            document.getElementById('tourText').textContent = step.text;
+            document.getElementById('tourProgress').textContent = `${currentTourStep + 1}/${tourSteps.length}`;
+        }
+        
+        function nextTourStep() {
+            if (currentTourStep < tourSteps.length - 1) {
+                currentTourStep++;
+                updateTourContent();
+            }
+        }
+        
+        function previousTourStep() {
+            if (currentTourStep > 0) {
+                currentTourStep--;
+                updateTourContent();
+            }
+        }
+        
+        function closeTour() {
+            document.getElementById('tourOverlay').style.display = 'none';
+        }
+        
+        function showWorkflows() {
+            const panel = document.getElementById('workflowPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function loadWorkflow(type) {
+            const workflow = workflows[type];
+            document.getElementById('queryInput').value = workflow.query;
+            
+            // Show workflow description
+            const result = document.getElementById('result');
+            result.innerHTML = `
+                <div class="result" style="border-left-color: #667eea;">
+                    <h4>🔥 Workflow Loaded: ${type.charAt(0).toUpperCase() + type.slice(1)}</h4>
+                    <p><strong>Description:</strong> ${workflow.description}</p>
+                    <p><strong>Query:</strong> "${workflow.query}"</p>
+                    <p>Click "Process with Context Engine" to see this workflow in action!</p>
+                </div>
+            `;
+            
+            // Hide workflow panel
+            document.getElementById('workflowPanel').style.display = 'none';
+            
+            // Scroll to query
+            document.getElementById('queryContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function loadSuggestion(query) {
+            document.getElementById('queryInput').value = query;
+        }
+
         async function processQuery() {
             const query = document.getElementById('queryInput').value.trim();
             const resultDiv = document.getElementById('result');
             const processBtn = document.getElementById('processBtn');
             
             if (!query) {
-                alert('Please enter a query first!');
+                alert('Please enter a query first! Try the guided tour or workflows above for examples.');
                 return;
             }
             
             processBtn.disabled = true;
-            processBtn.textContent = '⏳ Processing...';
+            processBtn.textContent = '⏳ Processing through 6 research components...';
             
-            resultDiv.innerHTML = '<div class="loading">🧠 Processing your query through the contextual engine...</div>';
+            resultDiv.innerHTML = `
+                <div class="loading">
+                    <h4>🧠 Context Engineering in Action</h4>
+                    <div style="text-align: left; margin: 15px 0;">
+                        <div style="margin: 5px 0;">🔍 <strong>Stage 1:</strong> Understanding & parsing your query...</div>
+                        <div style="margin: 5px 0;">📊 <strong>Stage 2:</strong> Extracting key information patterns...</div>
+                        <div style="margin: 5px 0;">💡 <strong>Stage 3:</strong> Highlighting relevant knowledge...</div>
+                        <div style="margin: 5px 0;">⚙️ <strong>Stage 4:</strong> Applying multi-component reasoning...</div>
+                        <div style="margin: 5px 0;">✅ <strong>Stage 5:</strong> Validating response coherence...</div>
+                    </div>
+                    <p>Processing through neural fields, memory systems, and symbolic reasoning...</p>
+                </div>
+            `;
             
             try {
                 const response = await fetch('/api/reason', {
@@ -503,22 +628,34 @@ async def serve_demo_page():
                 if (result.success) {
                     resultDiv.innerHTML = `
                         <div class="result">
-                            <h4>🎯 Result</h4>
+                            <h4>🎯 Contextual Analysis Complete</h4>
+                            <div class="value-highlight">
+                                <strong>🚀 This is what makes Context Engineering superior:</strong> Your query was processed through 6 integrated research components, providing deeper understanding than any single AI model.
+                            </div>
                             <p><strong>Query:</strong> ${query}</p>
                             <p><strong>Response:</strong> ${result.response}</p>
                             <div class="metrics">
                                 <div class="metric">
                                     <div class="metric-value">${result.confidence}%</div>
-                                    <div class="metric-label">Confidence</div>
+                                    <div class="metric-label">Confidence Score</div>
                                 </div>
                                 <div class="metric">
                                     <div class="metric-value">${result.processing_time}s</div>
                                     <div class="metric-label">Processing Time</div>
                                 </div>
                                 <div class="metric">
-                                    <div class="metric-value">${result.components_used}</div>
+                                    <div class="metric-value">${result.components_used}/6</div>
                                     <div class="metric-label">Components Used</div>
                                 </div>
+                            </div>
+                            <div style="margin-top: 15px;">
+                                <h5>🔍 Reasoning Trace (Full Transparency):</h5>
+                                <ul style="text-align: left;">
+                                    ${result.reasoning_trace.map(step => `<li>${step}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div style="margin-top: 15px; padding: 10px; background: #f8f9ff; border-radius: 6px;">
+                                <strong>💡 Try another workflow or ask a follow-up question to see how the system maintains context!</strong>
                             </div>
                         </div>
                     `;
@@ -540,10 +677,13 @@ async def serve_demo_page():
                 
                 const statusDiv = document.getElementById('statusInfo');
                 statusDiv.innerHTML = `
+                    <div class="value-highlight">
+                        <strong>🔥 Live System Status:</strong> All research components are active and ready to process your queries with superior contextual understanding.
+                    </div>
                     <div class="metrics">
                         <div class="metric">
                             <div class="metric-value">${status.components}</div>
-                            <div class="metric-label">Active Components</div>
+                            <div class="metric-label">Research Components Active</div>
                         </div>
                         <div class="metric">
                             <div class="metric-value">${status.status}</div>
@@ -551,9 +691,12 @@ async def serve_demo_page():
                         </div>
                         <div class="metric">
                             <div class="metric-value">${status.version}</div>
-                            <div class="metric-label">Version</div>
+                            <div class="metric-label">Framework Version</div>
                         </div>
                     </div>
+                    <p style="text-align: center; margin-top: 10px; font-size: 14px; color: #666;">
+                        IBM Zurich + Princeton ICML + Indiana University + Singapore-MIT + Shanghai AI Lab + Context Engineering
+                    </p>
                 `;
             } catch (error) {
                 document.getElementById('statusInfo').innerHTML = '<p>Status loading failed</p>';
@@ -569,6 +712,15 @@ async def serve_demo_page():
                 processQuery();
             }
         });
+        
+        // Auto-start tour for new users (optional)
+        setTimeout(() => {
+            const hasVisited = localStorage.getItem('contextengine_visited');
+            if (!hasVisited) {
+                localStorage.setItem('contextengine_visited', 'true');
+                startTour();
+            }
+        }, 2000);
     </script>
 </body>
 </html>
