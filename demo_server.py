@@ -362,6 +362,21 @@ Examples:
         self.end_headers()
         self.wfile.write(html_content.encode())
     
+    def serve_health(self):
+        """Serve health check endpoint for Kubernetes ingress."""
+        health_data = {
+            "status": "healthy",
+            "service": "context-engineering-demo", 
+            "version": "1.0.0",
+            "timestamp": time.time()
+        }
+        
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.end_headers()
+        self.wfile.write(json.dumps(health_data).encode())
+    
     def serve_status(self):
         """Serve system status."""
         status_data = {
