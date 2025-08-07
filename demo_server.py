@@ -29,9 +29,17 @@ class ContextEngineRequestHandler(SimpleHTTPRequestHandler):
     """Custom request handler for Context Engineering demos."""
     
     def __init__(self, *args, **kwargs):
-        # Initialize the contextual engine
-        self.engine = ContextualEngine()
-        self.api = ContextAPI()
+        # Initialize the contextual engine only if available
+        if ENGINE_AVAILABLE:
+            try:
+                self.engine = ContextualEngine()
+                self.api = ContextAPI()
+                self.engine_ready = True
+            except Exception as e:
+                print(f"⚠️  Failed to initialize Context Engine: {e}")
+                self.engine_ready = False
+        else:
+            self.engine_ready = False
         super().__init__(*args, **kwargs)
     
     def do_GET(self):
