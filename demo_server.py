@@ -426,7 +426,7 @@ Examples:
             self.end_headers()
             self.wfile.write(json.dumps(error_response).encode())
 
-def run_demo_server(port=8000):
+def run_demo_server(port=8001):
     """Run the demo server."""
     print(f"🚀 Context Engineering Demo Server")
     print(f"=" * 40)
@@ -442,7 +442,7 @@ def run_demo_server(port=8000):
     print(f"  • Context Engineering: Progressive Complexity")
     print(f"=" * 40)
     
-    with socketserver.TCPServer(("", port), ContextEngineRequestHandler) as httpd:
+    with socketserver.TCPServer(("0.0.0.0", port), ContextEngineRequestHandler) as httpd:
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
@@ -450,4 +450,8 @@ def run_demo_server(port=8000):
             httpd.shutdown()
 
 if __name__ == "__main__":
-    run_demo_server()
+    import sys
+    port = 8001
+    if len(sys.argv) > 1 and sys.argv[1] == '--port':
+        port = int(sys.argv[2])
+    run_demo_server(port)
