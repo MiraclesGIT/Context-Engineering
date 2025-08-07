@@ -7,8 +7,11 @@ values associated with predicted abstract variables.
 """
 
 import asyncio
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, TYPE_CHECKING
 from dataclasses import dataclass
+
+if TYPE_CHECKING:
+    from .manager import SymbolicVariable, SymbolicPattern
 
 @dataclass
 class RetrievalResult:
