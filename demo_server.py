@@ -14,10 +14,16 @@ from urllib.parse import parse_qs, urlparse
 import threading
 import time
 
-# Import the Context Engineering framework
-from core.engine import ContextualEngine
-from core.config import ContextualConfig
-from api.context import ContextAPI
+# Import the Context Engineering framework - with fallback for missing modules
+try:
+    from core.engine import ContextualEngine
+    from core.config import ContextualConfig
+    from api.context import ContextAPI
+    ENGINE_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️  Context Engineering modules not fully available: {e}")
+    print("🔄 Running in demo mode with mock responses")
+    ENGINE_AVAILABLE = False
 
 class ContextEngineRequestHandler(SimpleHTTPRequestHandler):
     """Custom request handler for Context Engineering demos."""
