@@ -1,0 +1,45 @@
+# Context Engineering - Core Dependencies
+# ==========================================
+
+# Core Python Requirements
+asyncio
+dataclasses
+typing-extensions>=4.0.0
+collections
+
+# Configuration and Data Handling
+pyyaml>=5.4.0
+json
+
+# System Monitoring and Performance
+psutil>=5.8.0
+time
+os
+pathlib
+
+# Scientific Computing and Mathematics
+numpy>=1.21.0
+math
+statistics
+random
+
+# Development and Testing (Optional - for development setup)
+pytest>=6.0
+pytest-asyncio>=0.18.0
+black>=21.0.0
+flake8>=4.0.0
+mypy>=0.910
+isort>=5.9.0
+
+# Documentation (Optional - for documentation generation)
+sphinx>=4.0.0
+sphinx-rtd-theme>=1.0.0
+sphinx-autodoc-typehints>=1.12.0
+
+# Examples and Visualization (Optional - for running examples)
+jupyter>=1.0.0
+matplotlib>=3.5.0
+plotly>=5.0.0
+
+# Note: Some modules like asyncio, json, math, os, time are built-in Python modules
+# and don't need to be installed separately. They are listed here for completeness.
