@@ -84,13 +84,13 @@
                 .then(data => {
                     document.getElementById('redirectMessage').innerHTML = 
                         '<p>Context Engine Status: ' + data.status + '</p>' +
-                        '<a href="/api/demo-ui" class="redirect-btn">🚀 Launch Interactive Demo</a>' +
+                        '<a href="http://localhost:8001/" class="redirect-btn">🚀 Launch Interactive Demo</a>' +
                         '<div class="status">' + data.components + ' components active, version ' + data.version + '</div>';
                 })
                 .catch(error => {
                     document.getElementById('redirectMessage').innerHTML = 
                         '<p>Context Engine Loading...</p>' +
-                        '<a href="/api/demo-ui" class="redirect-btn">🚀 Launch Interactive Demo</a>' +
+                        '<a href="http://localhost:8001/" class="redirect-btn">🚀 Launch Interactive Demo</a>' +
                         '<div class="status">Loading framework components...</div>';
                 });
         }, 1000);
