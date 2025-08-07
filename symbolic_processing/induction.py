@@ -7,9 +7,12 @@ over abstract variables to identify patterns and rules.
 """
 
 import asyncio
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, TYPE_CHECKING
 from dataclasses import dataclass
 from collections import defaultdict
+
+if TYPE_CHECKING:
+    from .manager import SymbolicVariable, SymbolicPattern
 
 @dataclass
 class InductionResult:
