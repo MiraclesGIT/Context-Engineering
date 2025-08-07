@@ -43,10 +43,22 @@ class ReasoningResponse(BaseModel):
     components_used: int
     reasoning_trace: list
 
-@app.get("/health")
-@app.head("/health")
+@app.get("/api/health")
+@app.head("/api/health")
 async def health_check():
     """Health check endpoint for Kubernetes ingress."""
+    return {
+        "status": "healthy",
+        "service": "context-engineering-demo",
+        "version": "1.0.0",
+        "timestamp": time.time()
+    }
+
+# Also keep the health endpoint at root for direct access
+@app.get("/health")
+@app.head("/health") 
+async def health_check_root():
+    """Health check endpoint for direct access."""
     return {
         "status": "healthy",
         "service": "context-engineering-demo",
