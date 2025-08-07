@@ -243,16 +243,69 @@ async def serve_demo_page():
         </div>
         
         <div class="demo-section">
-            <h3>🚀 Interactive Demo</h3>
-            <p>Try the contextual engine with your own queries:</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>🚀 Interactive Demo</h3>
+                <div>
+                    <button onclick="startTour()" class="tour-btn">📖 Start Guided Tour</button>
+                    <button onclick="showWorkflows()" class="workflow-btn">⚡ Example Workflows</button>
+                </div>
+            </div>
             
-            <textarea id="queryInput" placeholder="Enter your question or problem here...
-Examples:
-- What are the key principles of software architecture?
-- Explain quantum computing in simple terms
-- How should I approach learning machine learning?"></textarea>
+            <div id="tourOverlay" style="display: none;" class="tour-overlay">
+                <div class="tour-content">
+                    <h4 id="tourTitle">Welcome to Context Engineering</h4>
+                    <p id="tourText">This framework integrates cutting-edge research from 6 leading institutions...</p>
+                    <div class="tour-controls">
+                        <button onclick="previousTourStep()">← Previous</button>
+                        <span id="tourProgress">1/7</span>
+                        <button onclick="nextTourStep()">Next →</button>
+                        <button onclick="closeTour()" class="close-tour">✕ Close</button>
+                    </div>
+                </div>
+            </div>
             
-            <br><br>
+            <div id="workflowPanel" style="display: none;" class="workflow-panel">
+                <h4>🔥 Pre-built Workflows - Click to Try</h4>
+                <div class="workflow-grid">
+                    <div class="workflow-card" onclick="loadWorkflow('research')">
+                        <h5>🎓 Research Assistant</h5>
+                        <p>Multi-step literature analysis and synthesis</p>
+                    </div>
+                    <div class="workflow-card" onclick="loadWorkflow('problem-solving')">
+                        <h5>🧩 Complex Problem Solving</h5>
+                        <p>Structured approach to challenging problems</p>
+                    </div>
+                    <div class="workflow-card" onclick="loadWorkflow('creative')">
+                        <h5>💡 Creative Innovation</h5>
+                        <p>Idea generation with contextual grounding</p>
+                    </div>
+                    <div class="workflow-card" onclick="loadWorkflow('technical')">
+                        <h5>⚙️ Technical Analysis</h5>
+                        <p>Deep technical understanding and explanation</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p><strong>Enter your query below or use the guided tour/workflows above:</strong></p>
+            
+            <div id="queryContainer">
+                <textarea id="queryInput" placeholder="Enter your question or problem here...
+
+🎯 Try these example queries:
+• Research: 'Compare quantum computing approaches for optimization problems'
+• Problem-Solving: 'How can we reduce carbon emissions in urban transportation?'
+• Creative: 'Design a novel approach to remote team collaboration'
+• Technical: 'Explain the architecture trade-offs in microservices vs monolith'"></textarea>
+                
+                <div class="query-suggestions" id="querySuggestions">
+                    <strong>Quick Examples:</strong>
+                    <button class="suggestion-btn" onclick="loadSuggestion('What are the implications of quantum supremacy for cryptography?')">Quantum & Crypto</button>
+                    <button class="suggestion-btn" onclick="loadSuggestion('How might AGI development impact economic structures?')">AGI Economics</button>
+                    <button class="suggestion-btn" onclick="loadSuggestion('Design a framework for ethical AI decision-making')">AI Ethics Framework</button>
+                </div>
+            </div>
+            
+            <br>
             <button onclick="processQuery()" id="processBtn">🔍 Process with Context Engine</button>
             
             <div id="result"></div>
