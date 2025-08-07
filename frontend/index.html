@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context Engineering Framework</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .redirect-btn {
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .redirect-btn:hover {
+            background: #5a6fd8;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: rgba(255,255,255,0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 Context Engineering</h1>
+        <p>A Comprehensive Contextual AI Engine<br>
+        <small>Integrating Research from IBM Zurich, Princeton ICML, Indiana University, Singapore-MIT & Shanghai AI Lab</small></p>
+        
+        <div id="redirectMessage">
+            <p>Redirecting to interactive demo...</p>
+            <div class="status">
+                <div>⏳ Loading Context Engineering Framework...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Redirect to the backend demo
+        function redirectToDemo() {
+            // Try to access the backend demo directly
+            window.location.href = '/api/demo-ui';
+        }
+        
+        // Show loading message and redirect after a short delay
+        setTimeout(() => {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('redirectMessage').innerHTML = 
+                        '<p>Context Engine Status: ' + data.status + '</p>' +
+                        '<a href="/api/demo-ui" class="redirect-btn">🚀 Launch Interactive Demo</a>' +
+                        '<div class="status">' + data.components + ' components active, version ' + data.version + '</div>';
+                })
+                .catch(error => {
+                    document.getElementById('redirectMessage').innerHTML = 
+                        '<p>Context Engine Loading...</p>' +
+                        '<a href="/api/demo-ui" class="redirect-btn">🚀 Launch Interactive Demo</a>' +
+                        '<div class="status">Loading framework components...</div>';
+                });
+        }, 1000);
+    </script>
+</body>
+</html>
