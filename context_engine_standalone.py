@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-Context Engineering FastAPI Demo Server
-=======================================
+Context Engineering - Modern Research Showcase
+=============================================
 
-FastAPI version of the Context Engineering Framework demo for proper ingress compatibility.
+A comprehensive, modern website showcasing the Context Engineering repository
+with interactive diagrams, paradigm explanations, and visual demonstrations.
 """
 
 from fastapi import FastAPI, HTTPException
@@ -16,9 +17,9 @@ from typing import Dict, Any, Optional
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="Context Engineering Framework",
-    description="A Comprehensive Contextual AI Engine",
-    version="1.0.0"
+    title="Context Engineering Research Hub",
+    description="Beyond Prompt Engineering - The Science of Context",
+    version="2.0.0"
 )
 
 # Add CORS middleware
@@ -30,18 +31,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class ReasoningRequest(BaseModel):
-    query: str
-    context: Optional[Dict[str, Any]] = None
-
-class ReasoningResponse(BaseModel):
-    success: bool
-    query: str
-    response: str
-    confidence: int
-    processing_time: str
-    components_used: int
-    reasoning_trace: list
+class ResearchQuery(BaseModel):
+    topic: str
+    paradigm: Optional[str] = None
+    complexity_level: Optional[str] = "intermediate"
 
 @app.get("/health")
 @app.head("/health")
@@ -49,63 +42,244 @@ async def health_check():
     """Health check endpoint for Kubernetes ingress."""
     return {
         "status": "healthy",
-        "service": "context-engineering-demo",
-        "version": "1.0.0",
+        "service": "context-engineering-research",
+        "version": "2.0.0",
         "timestamp": time.time()
     }
 
-@app.get("/api/status")
-async def get_status():
-    """Get system status."""
+@app.get("/api/research-areas")
+async def get_research_areas():
+    """Get all research areas and paradigms."""
     return {
-        "status": "operational",
-        "components": 6,
-        "version": "1.0.0"
-    }
-
-@app.get("/api/demo")
-async def get_demo_info():
-    """Get demo API information."""
-    return {
-        "message": "Context Engineering Demo API",
-        "endpoints": [
-            "/health - Health check",
-            "/api/status - System status",
-            "/api/reason - Process reasoning queries"
+        "paradigms": [
+            {
+                "id": "biological_metaphor",
+                "name": "Biological Metaphor",
+                "description": "From atoms to neural fields - a progressive complexity framework",
+                "levels": ["Atoms", "Molecules", "Cells", "Organs", "Neural Systems", "Neural Fields"],
+                "color": "#4f46e5"
+            },
+            {
+                "id": "field_theory",
+                "name": "Neural Field Theory", 
+                "description": "Context as continuous semantic landscapes with resonance and persistence",
+                "concepts": ["Resonance", "Persistence", "Attractors", "Boundaries"],
+                "color": "#059669"
+            },
+            {
+                "id": "symbolic_mechanisms",
+                "name": "Symbolic Mechanisms",
+                "description": "Emergent symbol processing in LLMs through three-stage architecture",
+                "stages": ["Symbol Abstraction", "Symbolic Induction", "Retrieval"],
+                "color": "#dc2626"
+            },
+            {
+                "id": "quantum_semantics", 
+                "name": "Quantum Semantics",
+                "description": "Observer-dependent meaning with non-classical contextuality",
+                "principles": ["Superposition", "Measurement", "Non-Commutativity", "Contextuality"],
+                "color": "#7c3aed"
+            },
+            {
+                "id": "cognitive_tools",
+                "name": "Cognitive Tools",
+                "description": "Structured reasoning through modular cognitive operations",
+                "operations": ["Understand", "Extract", "Highlight", "Apply", "Validate"],
+                "color": "#ea580c"
+            }
+        ],
+        "research_institutions": [
+            {"name": "IBM Zurich", "focus": "Cognitive Tools Framework"},
+            {"name": "Princeton ICML", "focus": "Symbolic Processing"},
+            {"name": "Indiana University", "focus": "Quantum Semantics"},
+            {"name": "Singapore-MIT", "focus": "Memory Systems"},
+            {"name": "Shanghai AI Lab", "focus": "Neural Fields"}
         ]
     }
 
-@app.post("/api/reason", response_model=ReasoningResponse)
-async def process_reasoning(request: ReasoningRequest):
-    """Process reasoning requests."""
-    try:
-        query = request.query
-        
-        # Mock processing (same as original demo)
-        response_data = ReasoningResponse(
-            success=True,
-            query=query,
-            response=f"🧠 Context Engineering Demo Response: This query '{query}' has been processed through our comprehensive contextual framework integrating multiple research components. The system demonstrates multi-layered reasoning combining symbolic processing, neural field dynamics, quantum semantics, and progressive complexity management to provide contextually-aware responses.",
-            confidence=87,
-            processing_time="1.23",
-            components_used=5,
-            reasoning_trace=[
-                "✓ Understanding phase - Query parsed and contextualized",
-                "✓ Information extraction - Key concepts identified", 
-                "✓ Pattern highlighting - Relevant patterns matched",
-                "✓ Reasoning application - Multi-step inference executed",
-                "✓ Validation - Response coherence verified"
+@app.post("/api/explore-paradigm")
+async def explore_paradigm(query: ResearchQuery):
+    """Explore a specific paradigm with examples."""
+    
+    paradigm_data = {
+        "biological_metaphor": {
+            "overview": "Context engineering progresses through biological complexity levels, from simple atomic prompts to sophisticated neural field dynamics.",
+            "progression": [
+                {"level": "Atoms", "description": "Single instructions and basic prompts", "example": "Translate 'hello' to French"},
+                {"level": "Molecules", "description": "Few-shot examples and demonstrations", "example": "dog -> animal\ncar -> vehicle\nrose -> ?"},
+                {"level": "Cells", "description": "Stateful memory and conversation persistence", "example": "Maintaining context across conversation turns"},
+                {"level": "Organs", "description": "Multi-step workflows and agent orchestration", "example": "Research → Analyze → Synthesize → Present"},
+                {"level": "Neural Systems", "description": "Cognitive tools extending reasoning capabilities", "example": "Using structured reasoning frameworks"},
+                {"level": "Neural Fields", "description": "Continuous semantic landscapes with emergent properties", "example": "Context as resonating information medium"}
+            ],
+            "diagram_data": {
+                "nodes": [
+                    {"id": "atoms", "label": "Atoms", "level": 0, "color": "#fee2e2"},
+                    {"id": "molecules", "label": "Molecules", "level": 1, "color": "#fef3c7"},
+                    {"id": "cells", "label": "Cells", "level": 2, "color": "#d1fae5"},
+                    {"id": "organs", "label": "Organs", "level": 3, "color": "#dbeafe"},
+                    {"id": "neural_systems", "label": "Neural Systems", "level": 4, "color": "#e0e7ff"},
+                    {"id": "neural_fields", "label": "Neural Fields", "level": 5, "color": "#f3e8ff"}
+                ],
+                "connections": [
+                    {"source": "atoms", "target": "molecules"},
+                    {"source": "molecules", "target": "cells"},
+                    {"source": "cells", "target": "organs"},
+                    {"source": "organs", "target": "neural_systems"},
+                    {"source": "neural_systems", "target": "neural_fields"}
+                ]
+            }
+        },
+        "field_theory": {
+            "overview": "Neural fields treat context as continuous semantic medium where information persists through resonance rather than explicit storage.",
+            "key_concepts": [
+                {"concept": "Resonance", "description": "Information patterns that align and reinforce each other", "visual": "wave_interference"},
+                {"concept": "Persistence", "description": "Field states maintain activation patterns over time", "visual": "field_decay"},
+                {"concept": "Attractors", "description": "Stable configurations that draw semantic patterns", "visual": "attractor_basin"},
+                {"concept": "Boundaries", "description": "Permeable interfaces controlling information flow", "visual": "boundary_dynamics"}
+            ],
+            "field_equations": {
+                "resonance": "R(t) = ∫ f₁(x,t) · f₂(x,t) dx",
+                "persistence": "P(t) = P₀ · e^(-λt)",
+                "attractor_strength": "A = ∇²φ + F(φ)",
+                "boundary_permeability": "J = -D∇φ · n̂"
+            },
+            "applications": [
+                "Long-term conversation memory",
+                "Semantic coherence maintenance", 
+                "Context compression without information loss",
+                "Cross-domain knowledge transfer"
             ]
-        )
-        
-        return response_data
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Processing error: {str(e)}")
+        },
+        "symbolic_mechanisms": {
+            "overview": "LLMs develop emergent three-stage symbolic architecture enabling abstract reasoning through variable manipulation.",
+            "three_stages": [
+                {
+                    "stage": "Symbol Abstraction", 
+                    "layer": "Early Layers",
+                    "function": "Convert input tokens to abstract variables based on relations",
+                    "example": "['dog', 'cat', 'dog'] → [A, B, A]"
+                },
+                {
+                    "stage": "Symbolic Induction",
+                    "layer": "Intermediate Layers", 
+                    "function": "Recognize patterns over abstract variables",
+                    "example": "[A, B, A] pattern recognition across instances"
+                },
+                {
+                    "stage": "Retrieval",
+                    "layer": "Later Layers",
+                    "function": "Map abstract variables back to concrete tokens", 
+                    "example": "A → 'dog' in current context"
+                }
+            ],
+            "research_evidence": "Yang et al. (2025) demonstrated these mechanisms through causal mediation analysis",
+            "implications": [
+                "Design contexts emphasizing abstract patterns",
+                "Leverage indirection for flexible reasoning",
+                "Create transparent symbolic operations",
+                "Support generalization across domains"
+            ]
+        },
+        "quantum_semantics": {
+            "overview": "Meaning exists in superposition until actualized through observer interaction, exhibiting non-classical contextuality.",
+            "quantum_principles": [
+                {
+                    "principle": "Superposition",
+                    "description": "Multiple interpretations exist simultaneously",
+                    "equation": "|ψ⟩ = Σᵢ cᵢ|eᵢ⟩"
+                },
+                {
+                    "principle": "Measurement", 
+                    "description": "Context collapses superposition to specific meaning",
+                    "equation": "|ψ_interpreted⟩ = O|ψ⟩/||O|ψ⟩||"
+                },
+                {
+                    "principle": "Non-Commutativity",
+                    "description": "Order of context application matters",
+                    "equation": "[O_A, O_B] = O_A O_B - O_B O_A ≠ 0"
+                },
+                {
+                    "principle": "Contextuality",
+                    "description": "Bell inequality violations in meaning",
+                    "equation": "|CHSH| > 2 (observed: 2.3-2.8)"
+                }
+            ],
+            "semantic_degeneracy": {
+                "formula": "P(perfect) ≈ (1/db)^K(M(SE))",
+                "explanation": "Interpretation probability decreases exponentially with semantic complexity"
+            },
+            "applications": [
+                "Bayesian interpretation sampling",
+                "Ambiguity-aware context design", 
+                "Non-classical context operations",
+                "Observer-dependent meaning systems"
+            ]
+        },
+        "cognitive_tools": {
+            "overview": "Structured reasoning through modular cognitive operations that enhance LLM capabilities systematically.",
+            "five_operations": [
+                {"tool": "Understand", "purpose": "Comprehend the problem structure and requirements"},
+                {"tool": "Extract", "purpose": "Identify relevant information and key concepts"},
+                {"tool": "Highlight", "purpose": "Emphasize critical patterns and relationships"},
+                {"tool": "Apply", "purpose": "Execute reasoning operations and transformations"},
+                {"tool": "Validate", "purpose": "Verify results and check for consistency"}
+            ],
+            "research_source": "IBM Zurich demonstrated 26.7% → 43.3% improvement on AIME2024",
+            "implementation": {
+                "prompt_templates": "Cognitive tools as structured prompt templates",
+                "tool_calls": "Operations encapsulated as callable functions",
+                "reasoning_scaffolds": "Step-by-step cognitive frameworks",
+                "verification_loops": "Built-in validation and backtracking"
+            },
+            "benefits": [
+                "Transparent reasoning processes",
+                "Improved problem-solving accuracy",
+                "Modular and composable operations",
+                "Reduces cognitive load on base model"
+            ]
+        }
+    }
+    
+    if query.topic not in paradigm_data:
+        raise HTTPException(status_code=404, detail="Paradigm not found")
+    
+    return {
+        "success": True,
+        "paradigm": query.topic,
+        "data": paradigm_data[query.topic],
+        "complexity_level": query.complexity_level,
+        "timestamp": time.time()
+    }
+
+@app.get("/api/research-metrics")
+async def get_research_metrics():
+    """Get research metrics and statistics."""
+    return {
+        "repository_stats": {
+            "research_papers": 1400,
+            "institutions": 6,
+            "paradigms": 5,
+            "implementation_examples": 50,
+            "active_contributors": 25
+        },
+        "performance_metrics": {
+            "cognitive_tools_improvement": "26.7% → 43.3% (AIME2024)",
+            "mem1_efficiency": "2x faster long-horizon tasks",
+            "symbolic_mechanisms": "3-stage architecture identified",
+            "quantum_contextuality": "2.3-2.8 CHSH violations",
+            "field_theory_applications": "Continuous context beyond token limits"
+        },
+        "research_impact": {
+            "arxiv_papers": 8,
+            "icml_publications": 2,
+            "industry_adoption": "Growing",
+            "academic_citations": "Increasing"
+        }
+    }
 
 @app.get("/", response_class=HTMLResponse)
-@app.get("/api/demo-ui", response_class=HTMLResponse)
-async def serve_demo_page():
+async def serve_research_hub():
     """Serve the main demo HTML page."""
     html_content = """
 <!DOCTYPE html>
