@@ -7,8 +7,11 @@ for efficient cognitive resource allocation.
 """
 
 import asyncio
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, TYPE_CHECKING
 from dataclasses import dataclass
+
+if TYPE_CHECKING:
+    from .manager import ComplexityRecommendation
 
 @dataclass
 class ComplexityFactors:
