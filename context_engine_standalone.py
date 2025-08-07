@@ -437,30 +437,39 @@ async def serve_demo_page():
         
         <div class="demo-section">
             <h3>🏗️ Architecture Components</h3>
+            <div class="value-highlight">
+                <strong>🎯 Value Proposition:</strong> This isn't just another AI model - it's a complete contextual reasoning system that combines 6 research breakthroughs into a unified framework for superior AI performance.
+            </div>
             <div class="component-list">
                 <div class="component">
-                    <h4>🧠 Cognitive Tools (IBM Zurich)</h4>
-                    <p>Structured reasoning through modular cognitive operations: Understand → Extract → Highlight → Apply → Validate</p>
+                    <h4><span class="step-indicator">1</span> 🧠 Cognitive Tools (IBM Zurich)</h4>
+                    <p><strong>Value:</strong> 5-stage structured reasoning (Understand → Extract → Highlight → Apply → Validate) ensures comprehensive problem analysis</p>
+                    <p><em>Research Impact:</em> Modular cognitive operations with adaptive tool selection</p>
                 </div>
                 <div class="component">
-                    <h4>🌊 Neural Fields (Shanghai AI Lab)</h4>
-                    <p>Dynamic field evolution with pattern injection and attractor formation for emergent behaviors</p>
+                    <h4><span class="step-indicator">2</span> 🌊 Neural Fields (Shanghai AI Lab)</h4>
+                    <p><strong>Value:</strong> Dynamic information processing with pattern injection and emergent behavior formation</p>
+                    <p><em>Research Impact:</em> Field evolution with attractor dynamics for complex reasoning</p>
                 </div>
                 <div class="component">
-                    <h4>🧮 Memory Systems (Singapore-MIT MEM1)</h4>
-                    <p>Efficient memory-reasoning synergy with intelligent consolidation and retrieval</p>
+                    <h4><span class="step-indicator">3</span> 🧮 Memory Systems (Singapore-MIT MEM1)</h4>
+                    <p><strong>Value:</strong> Intelligent consolidation and retrieval for long-term contextual understanding</p>
+                    <p><em>Research Impact:</em> Memory-reasoning synergy with adaptive budget management</p>
                 </div>
                 <div class="component">
-                    <h4>🔣 Symbolic Processing (Princeton ICML)</h4>
-                    <p>Three-stage symbolic processing: Abstraction → Induction → Retrieval for complex reasoning</p>
+                    <h4><span class="step-indicator">4</span> 🔣 Symbolic Processing (Princeton ICML)</h4>
+                    <p><strong>Value:</strong> Three-stage symbolic reasoning (Abstraction → Induction → Retrieval) for logical coherence</p>
+                    <p><em>Research Impact:</em> Pattern recognition with generalization and validation</p>
                 </div>
                 <div class="component">
-                    <h4>⚛️ Quantum Semantics (Indiana University)</h4>
-                    <p>Observer-dependent meaning actualization with semantic superposition and context collapse</p>
+                    <h4><span class="step-indicator">5</span> ⚛️ Quantum Semantics (Indiana University)</h4>
+                    <p><strong>Value:</strong> Observer-dependent meaning resolution for context-aware interpretation</p>
+                    <p><em>Research Impact:</em> Semantic superposition with measurement-based disambiguation</p>
                 </div>
                 <div class="component">
-                    <h4>📈 Progressive Complexity</h4>
-                    <p>Adaptive cognitive architecture scaling: Atom → Molecule → Cell → Organ → Neural System → Neural Field</p>
+                    <h4><span class="step-indicator">6</span> 📈 Progressive Complexity</h4>
+                    <p><strong>Value:</strong> Adaptive scaling from simple to complex reasoning (Atom→Molecule→Cell→Organ→System→Field)</p>
+                    <p><em>Research Impact:</em> Performance-based auto-scaling with efficiency monitoring</p>
                 </div>
             </div>
         </div>
