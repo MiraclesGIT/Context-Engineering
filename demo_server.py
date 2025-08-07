@@ -59,6 +59,33 @@ class ContextEngineRequestHandler(SimpleHTTPRequestHandler):
             # Serve static files
             super().do_GET()
     
+    def do_HEAD(self):
+        """Handle HEAD requests."""
+        parsed_path = urlparse(self.path)
+        path = parsed_path.path
+        
+        if path == '/':
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+        elif path == '/health':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+        elif path == '/api/status':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+        elif path == '/api/demo':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+        else:
+            super().do_HEAD()
+    
     def do_POST(self):
         """Handle POST requests."""
         parsed_path = urlparse(self.path)
