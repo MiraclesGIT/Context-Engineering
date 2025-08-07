@@ -49,6 +49,8 @@ class ContextEngineRequestHandler(SimpleHTTPRequestHandler):
         
         if path == '/':
             self.serve_demo_page()
+        elif path == '/health':
+            self.serve_health()
         elif path == '/api/status':
             self.serve_status()
         elif path == '/api/demo':
