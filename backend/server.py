@@ -104,6 +104,7 @@ async def process_reasoning(request: ReasoningRequest):
         raise HTTPException(status_code=500, detail=f"Processing error: {str(e)}")
 
 @app.get("/", response_class=HTMLResponse)
+@app.get("/api/demo-ui", response_class=HTMLResponse)
 async def serve_demo_page():
     """Serve the main demo HTML page."""
     html_content = """
